@@ -3,7 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetStudy.Core", "JetStudy.Core\JetStudy.Core.csproj", "{EA737978-EEB7-49AF-BCA0-9CAD10A9F7FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetStudy.Repositories", "JetStudy.Repositories\JetStudy.Repositories.csproj", "{9A54895E-B150-4B57-ABD3-D84199148AC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetStudy.WebApp", "JetStudy.WebApp\JetStudy.WebApp.csproj", "{23A4379C-2EB6-4E4F-8CE1-CC1BDC1FA31C}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA737978-EEB7-49AF-BCA0-9CAD10A9F7FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA737978-EEB7-49AF-BCA0-9CAD10A9F7FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA737978-EEB7-49AF-BCA0-9CAD10A9F7FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA737978-EEB7-49AF-BCA0-9CAD10A9F7FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A54895E-B150-4B57-ABD3-D84199148AC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A54895E-B150-4B57-ABD3-D84199148AC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A54895E-B150-4B57-ABD3-D84199148AC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A54895E-B150-4B57-ABD3-D84199148AC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23A4379C-2EB6-4E4F-8CE1-CC1BDC1FA31C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23A4379C-2EB6-4E4F-8CE1-CC1BDC1FA31C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23A4379C-2EB6-4E4F-8CE1-CC1BDC1FA31C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23A4379C-2EB6-4E4F-8CE1-CC1BDC1FA31C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
