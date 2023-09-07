@@ -1,0 +1,37 @@
+﻿@using JetStudy.Core.Entities
+
+@model Course
+
+@{
+    ViewData["Title"] = Model.Title ;
+}
+
+<h1>Детальна інформація про курс</h1>
+<hr />
+
+<div class="row">
+    <div class="col-2">Назва:</div>
+    <div class="col-10"><strong>@Model.Title</strong></div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-2">Короткий опис:</div>
+    <div class="col-4">@Model.ShortDesc</div>
+
+    <div class="col-2">Детальний опис:</div>
+    <div class="col-4">@Model.DetailedDesc</div>
+</div>
+
+<div class="row">
+    <div class="col-2">Вимоги до ПЗ:</div>
+    <div class="col-10">@Model.Requirements</div>
+</div>
+<hr />
+<h3>Інформація про сесії курсу</h3>
+
+<div class="row">
+    @foreach(var s in Model.Sessions)
+    {
+    <div class="col-12"><span class="badge bg-danger">@s.Status.Title</span> @s.Start.ToShortDateString() - @s.End.ToShortDateString()</div>
+    }
+</div>

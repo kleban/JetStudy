@@ -1,9 +1,8 @@
-﻿using JetStudy.Core.Context;
-using JetStudy.Core.Entities;
+﻿using JetStudy.Core.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace JetStudy.WebApp.Data
+namespace JetStudy.Core.Context
 {
     public class JetStudyContext : IdentityDbContext
     {

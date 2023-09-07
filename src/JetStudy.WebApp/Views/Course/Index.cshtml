@@ -1,0 +1,28 @@
+﻿@using JetStudy.Core.Entities
+
+@model IEnumerable<Course>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Список курсів</h1>
+<hr />
+
+<div class="row">
+    @for (int i = 0; i < 6; i++)
+    {
+        foreach (var course in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5 class="card-title">@course.Title</h5>
+                         <p class="card-text">@course.ShortDesc</p>
+                        <a href="/course/details/@course.Id" class="btn btn-outline-primary">Детальніше</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

@@ -1,4 +1,6 @@
-using JetStudy.WebApp.Data;
+using JetStudy.Core.Context;
+using JetStudy.Repositories.Interfaces;
+using JetStudy.Repositories.Repos;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +14,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<JetStudyContext>();
+
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

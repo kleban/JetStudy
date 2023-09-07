@@ -17,6 +17,7 @@ namespace JetStudy.Core.Entities
         public string DetailedDesc { get; set; }
         public string ShortDesc { get; set; }
         public string Requirements { get; set; }
+        //public string Path { get; set; }
         public virtual ICollection<CourseSession> Sessions { get; set; }
     }
 }
