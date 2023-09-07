@@ -1,4 +1,5 @@
-﻿using JetStudy.Core.Entities;
+﻿using JetStudy.Core.Context;
+using JetStudy.Core.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,6 +35,8 @@ namespace JetStudy.WebApp.Data
             modelBuilder.Entity<Certificate>()
                 .HasOne(x => x.ParticipationRecord)
                 .WithOne(x => x.Certificate).OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Seed();
 
             base.OnModelCreating(modelBuilder);
         }

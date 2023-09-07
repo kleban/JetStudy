@@ -97,6 +97,16 @@ namespace JetStudy.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Courses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DetailedDesc = "Курс \"Аналіз даних для наукових досліджень\" є спеціалізованим навчальним програмою, розробленим для тих, хто цікавиться використанням аналізу даних у наукових дослідженнях. Курс вдосконалює розуміння учасників щодо методів, інструментів і процесів, пов'язаних з обробкою і аналізом даних в контексті наукових досліджень.",
+                            Requirements = "Python, R, Jupyter Notebook, Anaconda, RStduio Desktop",
+                            ShortDesc = "Курс розглядає методи та інструменти аналізу даних у наукових дослідженнях. Включає в себе збір, очищення і статистичний аналіз даних, щоб підготувати учасників до ефективного проведення наукових досліджень.",
+                            Title = "Аналіз даних для наукових досліджень"
+                        });
                 });
 
             modelBuilder.Entity("JetStudy.Core.Entities.CourseSession", b =>
@@ -135,6 +145,18 @@ namespace JetStudy.Core.Migrations
                     b.HasIndex("TypeId");
 
                     b.ToTable("CourseSessions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CourseId = 1,
+                            End = new DateTime(2023, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Start = new DateTime(2023, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatusId = 1,
+                            Title = "Аналіз даних для наукових досліджень",
+                            TypeId = 3
+                        });
                 });
 
             modelBuilder.Entity("JetStudy.Core.Entities.CourseSessionStatus", b =>
@@ -152,6 +174,38 @@ namespace JetStudy.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CourseSessionStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            Title = "Йде набір"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            Title = "Чорновик"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Title = "Набір завершено"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Title = "У процесі"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Title = "Завершений"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Title = "Відмінений"
+                        });
                 });
 
             modelBuilder.Entity("JetStudy.Core.Entities.CourseSessionType", b =>
@@ -169,6 +223,23 @@ namespace JetStudy.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CourseSessionTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Title = "Онлайн"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Title = "Офлайн"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Title = "Змішана (онлайн + офлайн)"
+                        });
                 });
 
             modelBuilder.Entity("JetStudy.Core.Entities.Instructor", b =>

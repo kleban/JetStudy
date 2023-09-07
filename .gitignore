@@ -399,3 +399,4 @@ FodyWeavers.xsd
 
 # Project
 src/JetStudy.WebApp/Data/Migrations/
+src/JetStudy.Core/Migrations/
