@@ -32,6 +32,9 @@
 <div class="row">
     @foreach(var s in Model.Sessions)
     {
-    <div class="col-12"><span class="badge bg-danger">@s.Status.Title</span> @s.Start.ToShortDateString() - @s.End.ToShortDateString()</div>
+    <div class="col-12"><span class="badge bg-danger">@s.Status.Title</span> @s.Start.Value.ToShortDateString() - @s.End.Value.ToShortDateString() <span>@s.Type.Title</span></div>
     }
 </div>
+
+<hr />
+<a href="/session/create?courseId=@Model.Id" class="btn btn-outline-primary">Створити сесію курсу</a>

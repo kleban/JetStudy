@@ -10,19 +10,19 @@ using System.Threading.Tasks;
 
 namespace JetStudy.Repositories.Repos
 {
-    public class CourseRepository : ICourseRepository
+    public class SessionTypeRepository : ISessionTypeRepository
     {
         private JetStudyContext _context;
 
-        public CourseRepository(JetStudyContext context)
+        public SessionTypeRepository(JetStudyContext context)
         {
             _context = context;
         }
 
-        public void Add(Course obj)
+        public void Add(CourseSessionType obj)
         {
-            _context.Courses.Add(obj);
-            Save();
+           // _context.Courses.Add(obj);
+           // Save();
         }
 
         public void Delete(int id)
@@ -30,18 +30,15 @@ namespace JetStudy.Repositories.Repos
             throw new NotImplementedException();
         }
 
-        public Course Get(int id)
+        public CourseSessionType Get(int id)
         {
-            return _context.Courses
-                .Include(x=> x.Sessions)
-                .ThenInclude(x=> x.Status)
-                .Include(x => x.Sessions)
-                .ThenInclude(x=> x.Type).First(x=> x.Id == id);
+            return null;
+            //return _context.Courses.Include(x=> x.Sessions).ThenInclude(x=> x.Status).First(x=> x.Id == id);
         }
 
-        public IEnumerable<Course> GetAll()
+        public IEnumerable<CourseSessionType> GetAll()
         {
-            return _context.Courses.ToList();
+            return _context.CourseSessionTypes.ToList();
         }
 
         public void Save()
@@ -49,9 +46,9 @@ namespace JetStudy.Repositories.Repos
             _context.SaveChanges(); ;
         }
 
-        public void Update(Course obj)
+        public void Update(CourseSessionType obj)
         {
-            _context.Courses.Update(obj);
+            //_context.Courses.Update(obj);
         }
     }
 

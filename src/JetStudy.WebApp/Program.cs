@@ -16,6 +16,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<JetStudyContext>();
 
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<ICourseSessionRepository, CourseSessionRepository>();
+builder.Services.AddScoped<ISessionStatusRepository, SessionStatusRepository>();
+builder.Services.AddScoped<ISessionTypeRepository, SessionTypeRepository>();
 
 builder.Services.AddControllersWithViews();
 

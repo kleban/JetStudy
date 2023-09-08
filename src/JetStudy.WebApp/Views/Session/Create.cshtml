@@ -1,0 +1,49 @@
+﻿@using JetStudy.Core.Entities;
+@model CourseSession
+
+@{
+    var courseTitle = ViewBag.CourseTitle as string;
+    var types = ViewBag.Types as List<SelectListItem>;
+}
+
+<h1>Створення нової сесії</h1>
+<cite>@courseTitle</cite>
+
+<div class="row">
+    <div class="col-md-4">
+
+        <form asp-action="Create">
+
+            @Html.ValidationSummary()
+
+            <input type="hidden" asp-for="CourseId" />
+            <input type="hidden" asp-for="StatusId" />
+            <div data="mb-3">
+                <label asp-for="Title" class="form-label" />
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger" />
+            </div>
+
+            <div data="mb-3">
+                <label asp-for="Start" class="form-label" />
+                <input asp-for="Start" class="form-control" />
+                <span asp-validation-for="Start" class="text-danger" />
+            </div>
+
+            <div data="mb-3">
+                <label asp-for="End" class="form-label" />
+                <input asp-for="End" class="form-control" />
+                <span asp-validation-for="End" class="text-danger" />
+            </div>
+
+            <select asp-for="TypeId" asp-items="@(types)" id="x1" class="form-control">
+                <option value="0" selected="selected">- Оберіть тип заняття -</option>
+            </select>
+            <input type="hidden" asp-for="TypeId" />
+
+            <br />
+            <button type="submit" class="btn btn-success">Зберегти</button>
+
+        </form>
+    </div>
+</div>
