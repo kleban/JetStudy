@@ -1,0 +1,47 @@
+﻿@using JetStudy.Core.Entities;
+@model Course
+
+<h1>Створення нового курсу</h1>
+
+<div class="row">
+    <div class="col-md-4">
+
+        <form asp-action="Create" enctype="multipart/form-data">
+
+            @Html.ValidationSummary()
+
+            <div data="mb-3">
+                @Html.DisplayNameFor(model => model.Title)
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger" />
+            </div>
+
+            <div data="mb-3">
+                @Html.DisplayNameFor(model => model.ShortDesc)
+                @Html.TextAreaFor(model => model.ShortDesc, new { @class = "form-control"})
+                <span asp-validation-for="ShortDesc" class="text-danger" />
+            </div>
+
+            <div data="mb-3">
+                @Html.DisplayNameFor(model => model.DetailedDesc)
+                @Html.TextAreaFor(model => model.DetailedDesc, new { @class = "form-control"})
+                <span asp-validation-for="DetailedDesc" class="text-danger" />
+            </div>
+
+            <div class="form-group mt-3">
+                @Html.DisplayNameFor(model => model.CoverFile)
+                <input asp-for="CoverFile" accept="image/*" />
+                <span asp-validation-for="CoverFile" class="text-danger"></span>
+            </div>
+
+            <br />
+            <button type="submit" class="btn btn-success">Зберегти</button>
+
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

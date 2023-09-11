@@ -1,0 +1,12 @@
+﻿
+1. Create Folder for Course Images wwwroot/img/courses
+2. Додаємо файл no_cover.jpg для випадку, коли користувач не завантажив файл, встановлюємо властивість Copy To Output Directory - Copy if newer
+3. Додаємо властивості CoverPath та CoverFile до класу Course
+4. Виконуємо міграцію, приміняємо зміни до БД
+5. Пишемо код для візуалізації зображення у файлі Views/Course/Index
+
+-- add file --
+
+5. Виконуємо ін'єкцію об'єкта типу IWebHostEnvironment у контролер CourseController
+6. Пишемо формочку для створення нового курсу з завантаженням зображення
+7. Пишемо метод для обробки форми та збереження зображення
