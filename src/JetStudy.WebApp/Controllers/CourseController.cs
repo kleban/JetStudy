@@ -18,7 +18,6 @@ namespace JetStudy.WebApp.Controllers
             this.courseRepository = courseRepository;
             this.webHostEnvironment = webHostEnvironment;
         }
-
         public IActionResult Index()
         {
             return View(courseRepository.GetAll());
@@ -29,7 +28,6 @@ namespace JetStudy.WebApp.Controllers
             var course = courseRepository.Get(id);
             return course.CoverPath;
         }*/
-
         public IActionResult Create() 
         {
             return View(new Course());

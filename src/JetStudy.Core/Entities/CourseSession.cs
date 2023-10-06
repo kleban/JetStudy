@@ -33,6 +33,6 @@ namespace JetStudy.Core.Entities
         public DateTime? End { get; set; } = DateTime.Now;
         public virtual ICollection<Lesson>? Lessons { get; set; }
         public virtual ICollection<ParticipationRecord>? ParticipationRecords { get; set; }
-        public virtual ICollection<Instructor>? Instructors { get; set; }
+        public virtual ICollection<User>? Instructors { get; set; }
     }
 }

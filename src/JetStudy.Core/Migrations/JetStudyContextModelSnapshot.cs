@@ -22,10 +22,10 @@ namespace JetStudy.Core.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CourseSessionInstructor", b =>
+            modelBuilder.Entity("CourseSessionUser", b =>
                 {
-                    b.Property<int>("InstructorsId")
-                        .HasColumnType("int");
+                    b.Property<string>("InstructorsId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("SessionsId")
                         .HasColumnType("int");
@@ -34,7 +34,7 @@ namespace JetStudy.Core.Migrations
 
                     b.HasIndex("SessionsId");
 
-                    b.ToTable("CourseSessionInstructor");
+                    b.ToTable("CourseSessionUser");
                 });
 
             modelBuilder.Entity("JetStudy.Core.Entities.Certificate", b =>
@@ -84,6 +84,10 @@ namespace JetStudy.Core.Migrations
                     b.Property<string>("DetailedDesc")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Requirements")
                         .HasColumnType("nvarchar(max)");
 
@@ -96,6 +100,8 @@ namespace JetStudy.Core.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OwnerId");
+
                     b.ToTable("Courses");
 
                     b.HasData(
@@ -104,9 +110,20 @@ namespace JetStudy.Core.Migrations
                             Id = 1,
                             CoverPath = "\\img\\course\\no_cover.jpg",
                             DetailedDesc = "Курс \"Аналіз даних для наукових досліджень\" є спеціалізованим навчальним програмою, розробленим для тих, хто цікавиться використанням аналізу даних у наукових дослідженнях. Курс вдосконалює розуміння учасників щодо методів, інструментів і процесів, пов'язаних з обробкою і аналізом даних в контексті наукових досліджень.",
+                            OwnerId = "1f27bd84-3de8-4937-8ddc-a6a4d5312392",
                             Requirements = "Python, R, Jupyter Notebook, Anaconda, RStduio Desktop",
                             ShortDesc = "Курс розглядає методи та інструменти аналізу даних у наукових дослідженнях. Включає в себе збір, очищення і статистичний аналіз даних, щоб підготувати учасників до ефективного проведення наукових досліджень.",
                             Title = "Аналіз даних для наукових досліджень"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CoverPath = "\\img\\course\\no_cover.jpg",
+                            DetailedDesc = "Курс \"Аналіз даних для наукових досліджень\" є спеціалізованим навчальним програмою, розробленим для тих, хто цікавиться використанням аналізу даних у наукових дослідженнях. Курс вдосконалює розуміння учасників щодо методів, інструментів і процесів, пов'язаних з обробкою і аналізом даних в контексті наукових досліджень.",
+                            OwnerId = "ffb01bfb-0c3b-4fa5-9f49-a10f9d4a5c7c",
+                            Requirements = "Python, R, Jupyter Notebook, Anaconda, RStduio Desktop",
+                            ShortDesc = "Курс розглядає методи та інструменти аналізу даних у наукових дослідженнях. Включає в себе збір, очищення і статистичний аналіз даних, щоб підготувати учасників до ефективного проведення наукових досліджень.",
+                            Title = "Аналіз даних для маркетингу"
                         });
                 });
 
@@ -242,39 +259,6 @@ namespace JetStudy.Core.Migrations
                         });
                 });
 
-            modelBuilder.Entity("JetStudy.Core.Entities.Instructor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Bio")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Photo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Instructors");
-                });
-
             modelBuilder.Entity("JetStudy.Core.Entities.Lesson", b =>
                 {
                     b.Property<int>("Id")
@@ -323,8 +307,8 @@ namespace JetStudy.Core.Migrations
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -354,28 +338,143 @@ namespace JetStudy.Core.Migrations
                     b.ToTable("ParticipationStatuses");
                 });
 
-            modelBuilder.Entity("JetStudy.Core.Entities.Student", b =>
+            modelBuilder.Entity("JetStudy.Core.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Bio")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "ffb01bfb-0c3b-4fa5-9f49-a10f9d4a5c7c",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "9c2c3a4a-2930-475c-a957-bc630c992703",
+                            DateOfBirth = new DateTime(2048, 10, 6, 13, 38, 30, 109, DateTimeKind.Local).AddTicks(4570),
+                            Email = "admin@jetstudy.com",
+                            EmailConfirmed = false,
+                            FirstName = "Ivan",
+                            LastName = "Petrenko",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@JETSTUDY.COM",
+                            NormalizedUserName = "ADMIN@JETSTUDY.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEK6TgdrJ88sGOaQhGPXWrwgyiDZ4fUZ+B/np07KAzdxFLdt33t1Ud4pDQhjAf3IT/A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "726a295a-9a1a-40ba-9430-d910dd0ac229",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@jetstudy.com"
+                        },
+                        new
+                        {
+                            Id = "991720fe-a14e-4e45-bf52-2dcb950dc6c6",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0eb85940-729b-4885-99e1-f30a8484853c",
+                            DateOfBirth = new DateTime(2046, 10, 6, 13, 38, 30, 109, DateTimeKind.Local).AddTicks(4761),
+                            Email = "std@jetstudy.com",
+                            EmailConfirmed = false,
+                            FirstName = "Andriy",
+                            LastName = "Petrenko",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "STD@JETSTUDY.COM",
+                            NormalizedUserName = "STD@JETSTUDY.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJrk7GhdUSAgJHibLC3aWZwOaTg3h83O4nyNaENiGZQgrfDvqRqHMCC+D/qBCLQHSw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "af07ec0b-88c1-4f57-87f1-88e3c50260c5",
+                            TwoFactorEnabled = false,
+                            UserName = "std@jetstudy.com"
+                        },
+                        new
+                        {
+                            Id = "1f27bd84-3de8-4937-8ddc-a6a4d5312392",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4b0a3398-1b2b-40d3-a7e0-dcc0ce6ed2d8",
+                            DateOfBirth = new DateTime(2044, 10, 6, 13, 38, 30, 109, DateTimeKind.Local).AddTicks(4805),
+                            Email = "teacher@jetstudy.com",
+                            EmailConfirmed = false,
+                            FirstName = "Olena",
+                            LastName = "Petrenko",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "TEACHER@JETSTUDY.COM",
+                            NormalizedUserName = "TEACHER@JETSTUDY.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAELxkjBlil0wHFS5ZYRCBCOK1kQEow/q4hEKkUsIRSb1leOZSvwbGgxqYw0DQNp5EPA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "166822c1-76c9-4f65-94f7-44de3d1c7eea",
+                            TwoFactorEnabled = false,
+                            UserName = "teacher@jetstudy.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -403,6 +502,26 @@ namespace JetStudy.Core.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "941f0d6f-dcca-4501-95b4-695d3bd754df",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "02861b13-b07c-48e5-97f0-9b3971d53c43",
+                            Name = "Student",
+                            NormalizedName = "STUDENT"
+                        },
+                        new
+                        {
+                            Id = "5ad454e4-2e78-4560-9a26-4524b0989763",
+                            Name = "Teacher",
+                            NormalizedName = "TEACHER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -428,71 +547,6 @@ namespace JetStudy.Core.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -557,6 +611,33 @@ namespace JetStudy.Core.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "ffb01bfb-0c3b-4fa5-9f49-a10f9d4a5c7c",
+                            RoleId = "941f0d6f-dcca-4501-95b4-695d3bd754df"
+                        },
+                        new
+                        {
+                            UserId = "ffb01bfb-0c3b-4fa5-9f49-a10f9d4a5c7c",
+                            RoleId = "5ad454e4-2e78-4560-9a26-4524b0989763"
+                        },
+                        new
+                        {
+                            UserId = "1f27bd84-3de8-4937-8ddc-a6a4d5312392",
+                            RoleId = "5ad454e4-2e78-4560-9a26-4524b0989763"
+                        },
+                        new
+                        {
+                            UserId = "991720fe-a14e-4e45-bf52-2dcb950dc6c6",
+                            RoleId = "5ad454e4-2e78-4560-9a26-4524b0989763"
+                        },
+                        new
+                        {
+                            UserId = "991720fe-a14e-4e45-bf52-2dcb950dc6c6",
+                            RoleId = "02861b13-b07c-48e5-97f0-9b3971d53c43"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -580,9 +661,9 @@ namespace JetStudy.Core.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("CourseSessionInstructor", b =>
+            modelBuilder.Entity("CourseSessionUser", b =>
                 {
-                    b.HasOne("JetStudy.Core.Entities.Instructor", null)
+                    b.HasOne("JetStudy.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("InstructorsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -604,6 +685,17 @@ namespace JetStudy.Core.Migrations
                         .IsRequired();
 
                     b.Navigation("ParticipationRecord");
+                });
+
+            modelBuilder.Entity("JetStudy.Core.Entities.Course", b =>
+                {
+                    b.HasOne("JetStudy.Core.Entities.User", "Owner")
+                        .WithMany("Courses")
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("JetStudy.Core.Entities.CourseSession", b =>
@@ -652,11 +744,9 @@ namespace JetStudy.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("JetStudy.Core.Entities.Student", "Student")
+                    b.HasOne("JetStudy.Core.Entities.User", "Student")
                         .WithMany("ParticipationRecords")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StudentId");
 
                     b.Navigation("CourseSession");
 
@@ -676,7 +766,7 @@ namespace JetStudy.Core.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("JetStudy.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -685,7 +775,7 @@ namespace JetStudy.Core.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("JetStudy.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -700,7 +790,7 @@ namespace JetStudy.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("JetStudy.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -709,7 +799,7 @@ namespace JetStudy.Core.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("JetStudy.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -749,8 +839,10 @@ namespace JetStudy.Core.Migrations
                     b.Navigation("Records");
                 });
 
-            modelBuilder.Entity("JetStudy.Core.Entities.Student", b =>
+            modelBuilder.Entity("JetStudy.Core.Entities.User", b =>
                 {
+                    b.Navigation("Courses");
+
                     b.Navigation("ParticipationRecords");
                 });
 #pragma warning restore 612, 618

@@ -22,5 +22,9 @@ namespace JetStudy.Core.Entities
         [NotMapped]
         public IFormFile? CoverFile { get; set; }
         public virtual ICollection<CourseSession>? Sessions { get; set; }
+        public User Owner { get; set; }
+
+        [ForeignKey(nameof(Owner))]
+        public string OwnerId { get; set; }
     }
 }
