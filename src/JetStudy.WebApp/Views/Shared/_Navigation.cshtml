@@ -1,0 +1,26 @@
+﻿<ul class="navbar-nav flex-grow-1">
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Головна</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Course" asp-action="Index">Курси</a>
+    </li>
+    @if (User.IsInRole("Teacher"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="TeacherCourse" asp-action="Index">Мої курси</a>
+        </li>
+    }
+    @if (User.IsInRole("Student"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="StudentCourse" asp-action="Index">Моє навчання</a>
+        </li>
+    }
+    @if (User.IsInRole("Admin"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Користувачі</a>
+        </li>
+    }
+</ul>

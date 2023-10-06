@@ -135,6 +135,7 @@ namespace JetStudy.Core.Context
                 UserName = "admin@jetstudy.com",
                 Email = "admin@jetstudy.com",
                 FirstName = "Ivan",
+                EmailConfirmed = true,
                 LastName = "Petrenko",
                 NormalizedEmail = "ADMIN@JETSTUDY.COM",
                 NormalizedUserName = "ADMIN@JETSTUDY.COM"
@@ -147,6 +148,7 @@ namespace JetStudy.Core.Context
                 UserName = "std@jetstudy.com",
                 Email = "std@jetstudy.com",
                 FirstName = "Andriy",
+                EmailConfirmed = true,
                 LastName = "Petrenko",
                 NormalizedEmail = "STD@JETSTUDY.COM",
                 NormalizedUserName = "STD@JETSTUDY.COM"
@@ -160,6 +162,7 @@ namespace JetStudy.Core.Context
                 Email = "teacher@jetstudy.com",
                 FirstName = "Olena",
                 LastName = "Petrenko",
+                EmailConfirmed = true,
                 NormalizedEmail = "TEACHER@JETSTUDY.COM",
                 NormalizedUserName = "TEACHER@JETSTUDY.COM"
            };
