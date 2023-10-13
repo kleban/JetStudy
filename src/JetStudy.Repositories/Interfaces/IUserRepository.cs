@@ -10,12 +10,12 @@ namespace JetStudy.Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        Task<UserDto> Get(string id);
-        Task<IEnumerable<UserDto>> GetAll();
-        Task<string> Create(UserCreateDto obj);
-        Task Update(UserDto obj, string[] roles);
-        Task<IEnumerable<string>> GetRoles();
-        void Delete(string id);
+        Task<UserDto> GetAsync(string id);
+        Task<IEnumerable<UserDto>> GetAllAsync();
+        Task<string> CreateAsync(UserCreateDto obj);
+        Task UpdateAsync(UserDto obj, string[] roles);
+        Task<IEnumerable<string>> GetRolesAsync();
+        Task DeleteAsync(string id);
 
     }
 }

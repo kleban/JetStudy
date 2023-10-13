@@ -7,7 +7,7 @@ using System.Data;
 
 namespace JetStudy.WebApp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
         private readonly IUserRepository userRepository;
@@ -20,7 +20,7 @@ namespace JetStudy.WebApp.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
-            return View(await userRepository.GetAll());
+            return View(await userRepository.GetAllAsync());
         }
 
         [Authorize(Roles = "Admin")]
@@ -36,7 +36,7 @@ namespace JetStudy.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userId = await userRepository.Create(model);
+                var userId = await userRepository.CreateAsync(model);
                 return RedirectToAction("Edit", new { id = userId });
             }
             return View(model);
@@ -45,8 +45,8 @@ namespace JetStudy.WebApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            ViewBag.Roles = await userRepository.GetRoles();
-            var userUpdate = await userRepository.Get(id);           
+            ViewBag.Roles = await userRepository.GetRolesAsync();
+            var userUpdate = await userRepository.GetAsync(id);           
             return View(userUpdate);
         }
 
@@ -56,11 +56,25 @@ namespace JetStudy.WebApp.Controllers
          {
              if (ModelState.IsValid)
              {
-                 await userRepository.Update(model, roles);
+                 await userRepository.UpdateAsync(model, roles);
                  return RedirectToAction("Index");
              }
-             ViewBag.Roles = await userRepository.GetRoles();
+             ViewBag.Roles = await userRepository.GetRolesAsync();
              return View(model);
          }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            return View(await userRepository.GetAsync(id));
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> ConfirmDelete(string id)
+        {
+            await userRepository.DeleteAsync(id);
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace JetStudy.Repositories.Repos
             _context = context;
         }
 
-        public async Task<string> Create(UserCreateDto obj)
+        public async Task<string> CreateAsync(UserCreateDto obj)
         {
             var newUser = new User
             {
@@ -46,41 +46,45 @@ namespace JetStudy.Repositories.Repos
             return _context.Users.First(x=> x.Email == obj.Email).Id;
         }
 
-        public void Delete(string id)
+        public async Task DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            var user = _context.Users.Find(id);
+
+            if ((await userManager.GetRolesAsync(user)).Any())
+            {
+                await userManager.RemoveFromRolesAsync(user, await userManager.GetRolesAsync(user));
+            }
+            await userManager.DeleteAsync(user);
         }
 
-        public async Task<UserDto> Get(string id)
+        public async Task<UserDto> GetAsync(string id)
         {
-            var all = await GetAll();
-            return all.First(x => x.Id == id);
+            var user = await _context.Users.FindAsync(id);
+            var roles = await userManager.GetRolesAsync(user);           
+            return
+                new UserDto
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    IsConfirmed = user.EmailConfirmed,
+                    Roles = roles.ToList()
+                };
         }
 
-        public async Task<IEnumerable<UserDto>> GetAll()
+        public async Task<IEnumerable<UserDto>> GetAllAsync()
         {
-            var users = _context.Users.ToList();
+            var userIds = _context.Users.Select(x=> x.Id).ToList();
             var usersDto = new List<UserDto>();
 
-            foreach (var user in users)
-            {
-                var roles = await userManager.GetRolesAsync(user);
-                usersDto.Add(
-                    new UserDto
-                    {
-                        Id = user.Id,
-                        Email = user.Email,
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
-                        IsConfirmed = user.EmailConfirmed,
-                        Roles = roles.ToList()
-                    });
-            }
+            foreach (var id in userIds)            
+                usersDto.Add(await GetAsync(id));            
 
             return usersDto;
         }
 
-        public async Task Update(UserDto model, string[] roles)
+        public async Task UpdateAsync(UserDto model, string[] roles)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == model.Id);
 
@@ -109,7 +113,7 @@ namespace JetStudy.Repositories.Repos
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<string?>> GetRoles()
+        public async Task<IEnumerable<string?>> GetRolesAsync()
         {
             return _context.Roles.Select(x => x.Name).ToList();
         }
