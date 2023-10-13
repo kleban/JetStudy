@@ -10,10 +10,10 @@ namespace JetStudy.Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        Task<User> Get(string id);
-        Task<IEnumerable<UserReadDto>> GetAll();
+        Task<UserDto> Get(string id);
+        Task<IEnumerable<UserDto>> GetAll();
         Task<string> Create(UserCreateDto obj);
-        Task Update(UserUpdateDto obj, string[] roles);
+        Task Update(UserDto obj, string[] roles);
         Task<IEnumerable<string>> GetRoles();
         void Delete(string id);
 

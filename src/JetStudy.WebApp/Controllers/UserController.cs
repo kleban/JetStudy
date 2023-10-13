@@ -34,7 +34,7 @@ namespace JetStudy.WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(UserCreateDto model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var userId = await userRepository.Create(model);
                 return RedirectToAction("Edit", new { id = userId });
@@ -45,30 +45,22 @@ namespace JetStudy.WebApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            var userUpdate = (await userRepository.Get(id))
-                var user = new UserUpdateDto
-                {
-                    Email = x.Email,
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    Id = x.Id,
-                    IsConfirmed = x.IsConfirmed,
-                    Roles = await userRepository.GetRoles()
-                };
-            return View(user);
+            ViewBag.Roles = await userRepository.GetRoles();
+            var userUpdate = await userRepository.Get(id);           
+            return View(userUpdate);
         }
 
-       /* [HttpPost]
-        [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Edit(UserReadDto model, string[] roles)
-        {
-            if (ModelState.IsValid)
-            {
-                await usersRepository.UpdateAsync(model, roles);
-                return RedirectToAction("Index");
-            }
-            ViewBag.Roles = await usersRepository.GetRolesAsync();
-            return View(model);
-        }*/
+         [HttpPost]
+         [AutoValidateAntiforgeryToken]
+         public async Task<IActionResult> Edit(UserDto model, string[] roles)
+         {
+             if (ModelState.IsValid)
+             {
+                 await userRepository.Update(model, roles);
+                 return RedirectToAction("Index");
+             }
+             ViewBag.Roles = await userRepository.GetRoles();
+             return View(model);
+         }
     }
 }

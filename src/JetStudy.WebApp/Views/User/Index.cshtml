@@ -5,7 +5,7 @@
     ViewData["Title"] = "Користувачі";
 }
 
-@model IEnumerable<UserReadDto>
+@model IEnumerable<UserDto>
 
 <div class="float-end">
     <a href="/user/create" class="btn btn-warning">Створити користувача</a>
@@ -29,9 +29,9 @@
             @foreach (var u in Model)
             {
                 <tr>
-                    <td>@u.FullName</td>
+                    <td>@u.FirstName @u.LastName</td>
                     <td>@u.Email</td>
-                    <td>@u.IsConfirmed</td>
+                    <td> <input type="checkbox" checked="@u.IsConfirmed" disabled /></td>
                     <td> 
                         @string.Join(", ", u.Roles) 
                     </td>

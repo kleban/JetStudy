@@ -51,25 +51,27 @@ namespace JetStudy.Repositories.Repos
             throw new NotImplementedException();
         }
 
-        public async Task<User?> Get(string id)
+        public async Task<UserDto> Get(string id)
         {
-            return await _context.Users.FindAsync(id);
+            var all = await GetAll();
+            return all.First(x => x.Id == id);
         }
 
-        public async Task<IEnumerable<UserReadDto>> GetAll()
+        public async Task<IEnumerable<UserDto>> GetAll()
         {
             var users = _context.Users.ToList();
-            var usersDto = new List<UserReadDto>();
+            var usersDto = new List<UserDto>();
 
             foreach (var user in users)
             {
                 var roles = await userManager.GetRolesAsync(user);
                 usersDto.Add(
-                    new UserReadDto
+                    new UserDto
                     {
                         Id = user.Id,
                         Email = user.Email,
-                        FullName = $"{user.LastName} {user.FirstName}",
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
                         IsConfirmed = user.EmailConfirmed,
                         Roles = roles.ToList()
                     });
@@ -78,7 +80,7 @@ namespace JetStudy.Repositories.Repos
             return usersDto;
         }
 
-        public async Task Update(UserUpdateDto model, string[] roles)
+        public async Task Update(UserDto model, string[] roles)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == model.Id);
 
