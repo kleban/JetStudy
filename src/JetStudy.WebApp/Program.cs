@@ -24,7 +24,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
     }).AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<JetStudyContext>();
 
-//builder.Services.AddScoped<UserManager<User>>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<ICourseSessionRepository, CourseSessionRepository>();
 builder.Services.AddScoped<ISessionStatusRepository, SessionStatusRepository>();
