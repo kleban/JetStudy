@@ -1,0 +1,76 @@
+﻿
+
+
+<div class="sidebar-menu">
+    <ul class="menu">
+        <li class="sidebar-title">Menu</li>
+
+        <li class="sidebar-item active">
+            <a href="/" class='sidebar-link'>
+                <i class="fas fa-home"></i>
+                <span>Головна сторінка</span>
+            </a>
+        </li>
+                
+        <li class="sidebar-item  has-sub">
+            <a href="#" class='sidebar-link'>
+                <i class="bi bi-stack"></i>
+                <span>Курси</span>
+            </a>
+            <ul class="submenu ">
+                <li class="submenu-item ">
+                    <a href="/course">Усі курси</a>
+                </li>
+                @if (User.IsInRole("Teacher"))
+                {
+                    <li class="submenu-item ">
+                        <a href="/course/create">Створити новий</a>
+                    </li>
+                    <li class="submenu-item ">
+                        <a href="/teachercourse">Мої курси</a>
+                    </li>
+                }
+                @if (User.IsInRole("Student"))
+                {
+                    <li class="submenu-item ">
+                        <a href="/studentcourse">Моє навчання</a>
+                    </li>
+                }
+            </ul>
+        </li>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <li class="sidebar-item">
+                <a href="/user" class='sidebar-link'>
+                    <i class="fas fa-users"></i>
+                <span>Користувачі</span>
+            </a>
+        </li>
+        }
+
+        <li class="sidebar-title">Raise Support</li>
+
+        <li class="sidebar-item  ">
+            <a href="https://zuramai.github.io/mazer/docs" class='sidebar-link'>
+                <i class="bi bi-life-preserver"></i>
+                <span>Documentation</span>
+            </a>
+        </li>
+
+        <li class="sidebar-item  ">
+            <a href="https://github.com/zuramai/mazer/blob/main/CONTRIBUTING.md" class='sidebar-link'>
+                <i class="bi bi-puzzle"></i>
+                <span>Contribute</span>
+            </a>
+        </li>
+
+        <li class="sidebar-item  ">
+            <a href="https://github.com/zuramai/mazer#donate" class='sidebar-link'>
+                <i class="bi bi-cash"></i>
+                <span>Donate</span>
+            </a>
+        </li>
+
+    </ul>
+</div>

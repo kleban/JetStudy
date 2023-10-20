@@ -3,16 +3,21 @@
 @model IEnumerable<Course>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Список курсів";
+    //Layout = "~/Views/Shared/_JetStudyAdminLayout";
 }
 
 <div class="float-end">
     <a href="/course/create" class="btn btn-warning">Додати курс</a>
 </div>
-<h1>Список курсів</h1>
-<hr />
 
-<div class="row">
+<div class="page-heading">
+    <h3>@ViewData["Title"]</h3>
+</div>
+
+<div class="page-content">
+
+    <div class="row">
         @foreach (var course in Model)
         {
             <!-- Взяв картку з зображенням зі сторінки https://getbootstrap.com/docs/5.3/components/card/ -->
@@ -23,10 +28,14 @@
                     <img src="@course.CoverPath" class="card-img-top" alt="@course.Title">
                     <div class="card-body">
                         <h5 class="card-title">@course.Title</h5>
-                         <p class="card-text">@course.ShortDesc</p>
+                        <p class="card-text">@course.ShortDesc</p>
                         <a href="/course/details/@course.Id" class="btn btn-outline-primary">Детальніше</a>
                     </div>
                 </div>
             </div>
         }
+    </div>
+
 </div>
+
+
