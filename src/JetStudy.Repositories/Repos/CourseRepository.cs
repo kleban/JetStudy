@@ -19,8 +19,9 @@ namespace JetStudy.Repositories.Repos
             _context = context;
         }
 
-        public void Add(Course obj)
+        public void Add(Course obj, string username)
         {
+            obj.Owner = _context.Users.First(x => x.UserName == username);
             _context.Courses.Add(obj);
             Save();
         }
@@ -39,9 +40,14 @@ namespace JetStudy.Repositories.Repos
                 .ThenInclude(x=> x.Type).First(x=> x.Id == id);
         }
 
-        public IEnumerable<Course> GetAll()
+        public IEnumerable<Course> GetAll(string? username = null)
         {
-            return _context.Courses.ToList();
+            if(username is null)
+                return _context.Courses.Include(x=> x.Owner).ToList();
+
+            return _context.Courses
+                .Include(x => x.Owner)
+                .Where(x => x.Owner.UserName == username).ToList();
         }
 
         public void Save()

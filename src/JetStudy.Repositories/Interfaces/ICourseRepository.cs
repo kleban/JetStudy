@@ -10,8 +10,8 @@ namespace JetStudy.Repositories.Interfaces
     public interface ICourseRepository : ISave
     {
         Course Get(int id);
-        IEnumerable<Course> GetAll();
-        void Add(Course obj);
+        IEnumerable<Course> GetAll(string? username = null);
+        void Add(Course obj, string username);
         void Update(Course obj);
         void Delete(int id);
     }

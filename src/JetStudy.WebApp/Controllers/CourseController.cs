@@ -1,5 +1,6 @@
 ﻿using JetStudy.Core.Entities;
 using JetStudy.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -23,17 +24,26 @@ namespace JetStudy.WebApp.Controllers
             return View(courseRepository.GetAll());
         }
 
+        [Authorize(Roles = "Teacher")]
+        public IActionResult My()
+        {
+            return View(courseRepository.GetAll(User.Identity.Name));
+        }
+
         /*public string Image(int id)
         {
             var course = courseRepository.Get(id);
             return course.CoverPath;
         }*/
+
+        [Authorize]
         public IActionResult Create() 
         {
             return View(new Course());
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(Course model)
         {
             if (ModelState.IsValid)
@@ -52,7 +62,7 @@ namespace JetStudy.WebApp.Controllers
                     model.CoverFile.CopyTo(fileStream);
                 }
 
-                courseRepository.Add(model);
+                courseRepository.Add(model, User.Identity.Name);
                 return RedirectToAction(nameof(Index));
             }
             return View(model);
