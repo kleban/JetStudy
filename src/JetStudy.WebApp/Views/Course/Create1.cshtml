@@ -1,0 +1,100 @@
+﻿@using JetStudy.Core.Entities;
+@model Course
+@{
+    ViewData["Title"] = "Створення нового курсу";
+}
+
+<div class="page-title">
+    <div class="row">
+        <div class="col-12 col-md-6 order-md-1 order-last">
+            <h3>@ViewData["Title"]</h3>
+            <p class="text-subtitle text-muted">
+                Ви можете додати власні навчальні події
+            </p>
+        </div>
+        <div class="col-12 col-md-6 order-md-2 order-first">
+            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Головна</a></li>
+                    <li class="breadcrumb-item"><a href="/course">Курси</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Новий курс</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<hr />
+<section class="section">
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Введіть дані</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" id="frm" enctype="multipart/form-data">
+
+                        @Html.ValidationSummary()
+
+                        <div data="mb-3">
+                            @Html.DisplayNameFor(model => model.Title)
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger" />
+                        </div>
+
+                        <div data="mb-3">
+                            @Html.DisplayNameFor(model => model.ShortDesc)
+                            @Html.TextAreaFor(model => model.ShortDesc, new { @class = "form-control" })
+                            <span asp-validation-for="ShortDesc" class="text-danger" />
+                        </div>
+
+                        <div data="mb-3">
+                            @Html.DisplayNameFor(model => model.DetailedDesc)
+                            @Html.TextAreaFor(model => model.DetailedDesc, new { @class = "form-control" })
+                            <span asp-validation-for="DetailedDesc" class="text-danger" />
+                        </div>
+
+                        <br />
+                        <button type="button" onclick="save()" class="btn btn-success">Зберегти у LocalStorage</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+
+        $(function () {
+            //alert("data");
+            load();
+        });
+
+        save = function() {
+            var formData = JSON.stringify($("#frm").serializeArray());            
+            localStorage.setItem("course-data", formData);
+        }
+
+        load = function () {
+            var json = localStorage.getItem("course-data");
+            
+            var obj = JSON.parse(json);
+         
+            $("#Title").val(obj.find(item => item.name == "Title").value);
+            $("#ShortDesc").val(obj.find(item => item.name == "ShortDesc").value);
+            $("#DetailedDesc").val(obj.find(item => item.name == "DetailedDesc").value);
+        }
+
+    </script>
+}

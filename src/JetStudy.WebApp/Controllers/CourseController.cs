@@ -42,6 +42,13 @@ namespace JetStudy.WebApp.Controllers
             return View(new Course());
         }
 
+        [AllowAnonymous]
+        public IActionResult Create1()
+        {
+            return View(new Course());
+        }
+
+
         [HttpPost]
         [Authorize]
         public IActionResult Create(Course model)
