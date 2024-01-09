@@ -1,5 +1,5 @@
-﻿using JetStudy.Core.Context;
-using JetStudy.Core.Entities;
+﻿using JetStudy.Domain.Context;
+using JetStudy.Domain.Entities;
 using JetStudy.Repositories.DTOs.User;
 using JetStudy.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;

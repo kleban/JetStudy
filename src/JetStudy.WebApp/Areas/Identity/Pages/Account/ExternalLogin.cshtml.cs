@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using JetStudy.Core.Entities;
+using JetStudy.Domain.Entities;
 
 namespace JetStudy.WebApp.Areas.Identity.Pages.Account
 {

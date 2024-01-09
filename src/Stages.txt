@@ -1,0 +1,9 @@
+1. Removed other entities from Domain Project and Data Context 
+2. BaseEntity class transformed to IEntity interface (for IdentityUser Special!)
+3. User Inherited from IEntity
+4. DataContext inherited from more complex IdentityUser generic
+5. IUserRepository Added
+6. CourseRepository implemented
+7. UserRepository Implemented
+	7.1. Fixed in BaseRepository IEntity is class (need for Set<T>())
+8. Dependency Injection Extension added

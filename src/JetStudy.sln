@@ -3,11 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetStudy.Core", "JetStudy.Core\JetStudy.Core.csproj", "{EA737978-EEB7-49AF-BCA0-9CAD10A9F7FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JetStudy.Domain", "JetStudy.Core\JetStudy.Domain.csproj", "{EA737978-EEB7-49AF-BCA0-9CAD10A9F7FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetStudy.Repositories", "JetStudy.Repositories\JetStudy.Repositories.csproj", "{9A54895E-B150-4B57-ABD3-D84199148AC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JetStudy.Repositories", "JetStudy.Repositories\JetStudy.Repositories.csproj", "{9A54895E-B150-4B57-ABD3-D84199148AC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetStudy.WebApp", "JetStudy.WebApp\JetStudy.WebApp.csproj", "{23A4379C-2EB6-4E4F-8CE1-CC1BDC1FA31C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JetStudy.WebApp", "JetStudy.WebApp\JetStudy.WebApp.csproj", "{23A4379C-2EB6-4E4F-8CE1-CC1BDC1FA31C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F3C7C111-6E94-421E-BB75-CE006E888865}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JetStudy.Application", "JetStudy.Application\JetStudy.Application.csproj", "{D581553C-AFA2-4A7F-9910-BDC7C2BE65FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{5B881A6C-19EF-440E-ADAC-550AFB4701C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JetStudy.Persistence", "JetStudy.Persistence\JetStudy.Persistence.csproj", "{DBC9FC08-EE43-4296-9EF9-0F3DC77A0984}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{FF443028-875F-4B0D-AF63-691A03390991}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{65B70BC8-5620-4592-8ED1-0074A39578E5}"
+	ProjectSection(SolutionItems) = preProject
+		Stages.txt = Stages.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetStudy.NewApp", "JetStudy.NewApp\JetStudy.NewApp.csproj", "{24802E50-5336-4B33-9134-A31C8A22EC85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +44,29 @@ Global
 		{23A4379C-2EB6-4E4F-8CE1-CC1BDC1FA31C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23A4379C-2EB6-4E4F-8CE1-CC1BDC1FA31C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23A4379C-2EB6-4E4F-8CE1-CC1BDC1FA31C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D581553C-AFA2-4A7F-9910-BDC7C2BE65FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D581553C-AFA2-4A7F-9910-BDC7C2BE65FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D581553C-AFA2-4A7F-9910-BDC7C2BE65FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D581553C-AFA2-4A7F-9910-BDC7C2BE65FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBC9FC08-EE43-4296-9EF9-0F3DC77A0984}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBC9FC08-EE43-4296-9EF9-0F3DC77A0984}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBC9FC08-EE43-4296-9EF9-0F3DC77A0984}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBC9FC08-EE43-4296-9EF9-0F3DC77A0984}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24802E50-5336-4B33-9134-A31C8A22EC85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24802E50-5336-4B33-9134-A31C8A22EC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24802E50-5336-4B33-9134-A31C8A22EC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24802E50-5336-4B33-9134-A31C8A22EC85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EA737978-EEB7-49AF-BCA0-9CAD10A9F7FB} = {F3C7C111-6E94-421E-BB75-CE006E888865}
+		{9A54895E-B150-4B57-ABD3-D84199148AC3} = {5B881A6C-19EF-440E-ADAC-550AFB4701C7}
+		{23A4379C-2EB6-4E4F-8CE1-CC1BDC1FA31C} = {FF443028-875F-4B0D-AF63-691A03390991}
+		{D581553C-AFA2-4A7F-9910-BDC7C2BE65FF} = {F3C7C111-6E94-421E-BB75-CE006E888865}
+		{DBC9FC08-EE43-4296-9EF9-0F3DC77A0984} = {5B881A6C-19EF-440E-ADAC-550AFB4701C7}
+		{24802E50-5336-4B33-9134-A31C8A22EC85} = {FF443028-875F-4B0D-AF63-691A03390991}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {83A2C1FC-CFA6-417E-BA0A-17416528B09B}

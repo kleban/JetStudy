@@ -1,5 +1,5 @@
-﻿using JetStudy.Core.Context;
-using JetStudy.Core.Entities;
+﻿using JetStudy.Domain.Context;
+using JetStudy.Domain.Entities;
 using JetStudy.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;

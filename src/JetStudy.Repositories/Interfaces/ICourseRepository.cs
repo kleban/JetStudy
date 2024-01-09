@@ -1,4 +1,4 @@
-﻿using JetStudy.Core.Entities;
+﻿using JetStudy.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

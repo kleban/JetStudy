@@ -6,25 +6,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using JetStudy.Domain.Common;
 
-namespace JetStudy.Core.Entities
+namespace JetStudy.Domain.Entities
 {
-    public class Course
+    public class Course : IEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public string Title { get; set; }
+        public Guid Id { get; set; }
+        public string? Title { get; set; }
         public string? DetailedDesc { get; set; }
         public string? ShortDesc { get; set; }
         public string? Requirements { get; set; }
         public string? CoverPath { get; set; } = "\\img\\course\\no_cover.jpg";
         [NotMapped]
         public IFormFile? CoverFile { get; set; }
-        public virtual ICollection<CourseSession>? Sessions { get; set; }
         public User? Owner { get; set; }
-
         [ForeignKey(nameof(Owner))]
-        public string? OwnerId { get; set; }
+        public Guid? OwnerId { get; set; }
+  
     }
 }

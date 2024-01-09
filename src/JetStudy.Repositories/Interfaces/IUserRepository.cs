@@ -1,5 +1,4 @@
-﻿using JetStudy.Core.Entities;
-using JetStudy.Repositories.DTOs.User;
+﻿using JetStudy.Repositories.DTOs.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;

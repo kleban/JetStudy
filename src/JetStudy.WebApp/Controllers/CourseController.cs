@@ -1,4 +1,4 @@
-﻿using JetStudy.Core.Entities;
+﻿using JetStudy.Domain.Entities;
 using JetStudy.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

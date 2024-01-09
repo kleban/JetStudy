@@ -1,0 +1,7 @@
+﻿@using JetStudy.Application.Features.CourseFeatures.Commands.CreateCourse
+@model IEnumerable<CourseReadShortDto>
+
+@foreach(var c in Model)
+{
+    <p>@c.Title</p>
+}
